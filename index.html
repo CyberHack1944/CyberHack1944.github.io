@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SecureVault — Digital Banking Reimagined</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #0A0F2C;
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --cream: #F5F0E8;
+  --white: #FFFFFF;
+  --gray: #8A8FA8;
+  --card-bg: #111630;
+  --border: rgba(201,168,76,0.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 4rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,15,44,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);letter-spacing:0.02em}
+.logo span{color:var(--white)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.9rem;font-weight:500;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{display:flex;gap:1rem;align-items:center}
+.btn-outline{padding:0.6rem 1.4rem;border:1px solid var(--gold);color:var(--gold);border-radius:4px;text-decoration:none;font-size:0.9rem;font-weight:500;transition:all 0.2s}
+.btn-outline:hover{background:var(--gold);color:var(--navy)}
+.btn-solid{padding:0.6rem 1.4rem;background:var(--gold);color:var(--navy);border-radius:4px;text-decoration:none;font-size:0.9rem;font-weight:600;transition:all 0.2s}
+.btn-solid:hover{background:var(--gold-light)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:8rem 4rem 4rem;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(201,168,76,0.08) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(201,168,76,0.05) 0%,transparent 50%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-content{max-width:680px;position:relative;z-index:1;animation:fadeUp 0.9s ease both}
+.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;border:1px solid var(--border);border-radius:20px;font-size:0.8rem;color:var(--gold);font-weight:500;margin-bottom:2rem;background:rgba(201,168,76,0.06)}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:900;line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.5rem}
+h1 em{color:var(--gold);font-style:normal}
+.hero-sub{font-size:1.15rem;color:rgba(255,255,255,0.6);line-height:1.7;max-width:520px;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-hero{padding:0.9rem 2rem;background:var(--gold);color:var(--navy);border-radius:6px;text-decoration:none;font-size:1rem;font-weight:700;transition:all 0.2s;display:inline-flex;align-items:center;gap:0.5rem}
+.btn-hero:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-hero-ghost{padding:0.9rem 2rem;border:1px solid rgba(255,255,255,0.2);color:var(--white);border-radius:6px;text-decoration:none;font-size:1rem;font-weight:500;transition:all 0.2s}
+.btn-hero-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hero-stats{display:flex;gap:3rem;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--border)}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold)}
+.stat-label{font-size:0.85rem;color:var(--gray);margin-top:0.2rem}
+.hero-visual{position:absolute;right:4rem;top:50%;transform:translateY(-50%);width:420px;opacity:0.9;animation:fadeIn 1.2s ease both}
+.card-mock{background:linear-gradient(135deg,#1a2040,#0d1428);border:1px solid var(--border);border-radius:20px;padding:2rem;width:340px;position:relative;box-shadow:0 40px 80px rgba(0,0,0,0.5)}
+.card-chip{width:40px;height:30px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:6px;margin-bottom:2rem}
+.card-num{font-family:'Playfair Display',serif;font-size:1.1rem;letter-spacing:0.15em;color:rgba(255,255,255,0.8);margin-bottom:1.5rem}
+.card-row{display:flex;justify-content:space-between;align-items:flex-end}
+.card-name{font-size:0.8rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.08em}
+.card-name span{display:block;color:var(--white);font-size:0.95rem;margin-top:0.2rem;font-weight:500}
+.card-logo-sv{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--gold)}
+.floating-notif{position:absolute;bottom:-30px;left:-40px;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:0.8rem 1.2rem;display:flex;align-items:center;gap:0.8rem;box-shadow:0 20px 40px rgba(0,0,0,0.4);animation:float 3s ease-in-out infinite}
+.notif-icon{width:36px;height:36px;background:rgba(201,168,76,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.notif-title{font-size:0.8rem;font-weight:600;color:var(--white)}
+.notif-sub{font-size:0.7rem;color:var(--gray)}
+
+/* ── FEATURES ── */
+.features{padding:7rem 4rem;background:var(--navy)}
+.section-tag{text-align:center;font-size:0.8rem;color:var(--gold);font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem}
+.section-title{text-align:center;font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-bottom:1rem}
+.section-sub{text-align:center;color:var(--gray);max-width:520px;margin:0 auto 4rem;line-height:1.7}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1100px;margin:0 auto}
+.feature-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:2.5rem;transition:all 0.3s;position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity 0.3s}
+.feature-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 20px 60px rgba(201,168,76,0.1)}
+.feature-card:hover::before{opacity:1}
+.feature-icon{font-size:2rem;margin-bottom:1.5rem}
+.feature-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:0.8rem}
+.feature-desc{color:var(--gray);font-size:0.92rem;line-height:1.7}
+
+/* ── HOW IT WORKS ── */
+.how{padding:7rem 4rem;background:linear-gradient(180deg,var(--navy),#080c20)}
+.steps{display:flex;gap:0;max-width:900px;margin:0 auto;position:relative}
+.steps::before{content:'';position:absolute;top:40px;left:60px;right:60px;height:1px;background:linear-gradient(90deg,var(--gold),rgba(201,168,76,0.2),var(--gold));opacity:0.4}
+.step{flex:1;text-align:center;padding:0 2rem;position:relative}
+.step-num{width:80px;height:80px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--gold);background:var(--navy);position:relative;z-index:1}
+.step-title{font-weight:600;margin-bottom:0.5rem;font-size:1rem}
+.step-desc{color:var(--gray);font-size:0.88rem;line-height:1.6}
+
+/* ── CTA ── */
+.cta-section{padding:7rem 4rem;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,0.08) 0%,transparent 70%);pointer-events:none}
+.cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:900;margin-bottom:1rem}
+.cta-section p{color:var(--gray);max-width:500px;margin:0 auto 2.5rem;line-height:1.7}
+
+/* ── FOOTER ── */
+footer{padding:3rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);font-weight:700}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{color:var(--gray);text-decoration:none;font-size:0.85rem;transition:color 0.2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{color:var(--gray);font-size:0.8rem}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:0.9}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .hero{padding:7rem 1.5rem 4rem;flex-direction:column}
+  .hero-visual{display:none}
+  .features-grid{grid-template-columns:1fr}
+  .features,.how,.cta-section{padding:4rem 1.5rem}
+  .steps{flex-direction:column;gap:2rem}
+  .steps::before{display:none}
+  footer{flex-direction:column;text-align:center;padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Secure<span>Vault</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="login.html" class="btn-outline">Sign In</a>
+    <a href="register.html" class="btn-solid">Open Account</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🔒 Bank-grade security for everyone</div>
+    <h1>Banking that puts <em>security</em> first</h1>
+    <p class="hero-sub">SecureVault combines cutting-edge encryption with seamless digital banking. Your money, your data, your control — protected around the clock.</p>
+    <div class="hero-actions">
+      <a href="register.html" class="btn-hero">Open Free Account →</a>
+      <a href="#features" class="btn-hero-ghost">See How It Works</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">256-bit</div>
+        <div class="stat-label">AES Encryption</div>
+      </div>
+      <div>
+        <div class="stat-num">99.99%</div>
+        <div class="stat-label">Uptime SLA</div>
+      </div>
+      <div>
+        <div class="stat-num">2M+</div>
+        <div class="stat-label">Customers Protected</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="card-mock">
+      <div class="card-chip"></div>
+      <div class="card-num">4821 •••• •••• 7734</div>
+      <div class="card-row">
+        <div class="card-name">Card Holder <span>A. Olusegun</span></div>
+        <div class="card-logo-sv">SV</div>
+      </div>
+      <div class="floating-notif">
+        <div class="notif-icon">✅</div>
+        <div>
+          <div class="notif-title">Payment Secured</div>
+          <div class="notif-sub">₦245,000 — Verified & Protected</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="section-tag">Why SecureVault</div>
+  <h2 class="section-title">Security you can feel</h2>
+  <p class="section-sub">Every feature is designed from the ground up with your security as the top priority — not an afterthought.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🛡️</div>
+      <div class="feature-title">Military-Grade Encryption</div>
+      <p class="feature-desc">All transactions and data at rest are protected with AES-256 encryption — the same standard used by governments and intelligence agencies worldwide.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔐</div>
+      <div class="feature-title">Multi-Factor Authentication</div>
+      <p class="feature-desc">Every login is verified with biometric authentication, OTP, and device recognition. Unauthorised access attempts are blocked and flagged instantly.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👁️</div>
+      <div class="feature-title">Real-Time Fraud Detection</div>
+      <p class="feature-desc">Our AI-powered fraud engine analyses every transaction in milliseconds, detecting anomalies and stopping suspicious activity before it impacts your account.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Instant Transfers</div>
+      <p class="feature-desc">Send money anywhere in seconds. Real-time payments across all major banks with full end-to-end encryption on every transaction.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Full Audit Trail</div>
+      <p class="feature-desc">Every action on your account is logged with timestamps, IP addresses, and device fingerprints. Complete transparency, always.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌍</div>
+      <div class="feature-title">Zero-Knowledge Architecture</div>
+      <p class="feature-desc">Your sensitive data is encrypted before it ever reaches our servers. Even we cannot see your private information — only you hold the keys.</p>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="section-tag">Getting Started</div>
+  <h2 class="section-title">Up and running in minutes</h2>
+  <p class="section-sub">Opening a SecureVault account is simple, fast, and fully digital. No branch visits. No paperwork.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Create Your Account</div>
+      <p class="step-desc">Register with your email and basic details. Verification takes under two minutes.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Verify Your Identity</div>
+      <p class="step-desc">Upload your ID and complete a quick biometric check. Fully secure and private.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Fund Your Vault</div>
+      <p class="step-desc">Transfer funds from any bank. Your money is protected the moment it arrives.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Bank with Confidence</div>
+      <p class="step-desc">Send, receive, invest, and manage your finances with enterprise-grade security.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to secure your finances?</h2>
+  <p>Join over 2 million customers who trust SecureVault with their money every single day.</p>
+  <a href="register.html" class="btn-hero">Open Your Free Account →</a>
+</section>
+
+<footer>
+  <div class="footer-logo">SecureVault</div>
+  <div class="footer-links">
+    <a href="#features">Features</a>
+    <a href="login.html">Login</a>
+    <a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 SecureVault. Lab environment — not a real bank.</div>
+</footer>
+
+</body>
+</html>
